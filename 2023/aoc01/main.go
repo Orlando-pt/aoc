@@ -30,12 +30,8 @@ func main() {
 		lastLocation = getLastLocation(line)
         numbers := getRegexNumbers(line, firstLocation, lastLocation)
 
-		fmt.Println("Line:", line)
-        fmt.Println("Numbers:", numbers)
-
 		total += (numbers[0] * 10) + numbers[1]
 
-		// fmt.Println("--------------------")
 	}
 
 	fmt.Println("The answer is:", total)
@@ -77,7 +73,6 @@ func getRegexNumbers(line string, firstLocation int, lastLocation int) []int {
 		locations := re.FindAllStringIndex(line, -1)
 
 		if len(locations) > 0 {
-            // fmt.Println("Locations:", locations)
 			if locations[0][0] < firstLocation {
 				firstLocation = locations[0][0]
 				firstNumber = numbersDigits[i]
