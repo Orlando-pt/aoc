@@ -1,31 +1,35 @@
-package main
+package day01
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"regexp"
-	"strconv"
+
+	"github.com/orlando-pt/aoc/2023/utils"
 )
 
-func main() {
+func Part1(lines []string) int {
+    total := 0
+    firstLocation := 0
+    lastLocation := 0
+    line := ""
+
+    for _, line = range lines {
+        firstLocation = getFirstLocation(line)
+        lastLocation = getLastLocation(line)
+
+        total += (utils.StrToInt(string(line[firstLocation])) * 10) + utils.StrToInt(string(line[lastLocation]))
+
+    }
+
+    return total
+}
+
+func Part2(lines []string) int {
 	total := 0
 	firstLocation := 0
 	lastLocation := 0
 	line := ""
 
-	readFile, err := os.Open("input.txt")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-
-	for fileScanner.Scan() {
-		line = fileScanner.Text()
-
+	for _, line = range lines {
 		firstLocation = getFirstLocation(line)
 		lastLocation = getLastLocation(line)
         numbers := getRegexNumbers(line, firstLocation, lastLocation)
@@ -34,7 +38,7 @@ func main() {
 
 	}
 
-	fmt.Println("The answer is:", total)
+    return total
 }
 
 func getFirstLocation(line string) int {
@@ -44,8 +48,7 @@ func getFirstLocation(line string) int {
 		}
 	}
 
-	fmt.Println("Error: No last number found")
-	return 0
+	return len(line) - 1
 }
 
 func getLastLocation(line string) int {
@@ -55,7 +58,6 @@ func getLastLocation(line string) int {
 		}
 	}
 
-	fmt.Println("Error: No first number found")
 	return 0
 }
 
@@ -63,8 +65,8 @@ func getRegexNumbers(line string, firstLocation int, lastLocation int) []int {
 	numbersLetters := []string{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"}
 	numbersDigits := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-	firstNumber, _ := strconv.Atoi(string(line[firstLocation]))
-	lastNumber, _ := strconv.Atoi(string(line[lastLocation]))
+    firstNumber := utils.StrToInt(string(line[firstLocation]))
+    lastNumber := utils.StrToInt(string(line[lastLocation]))
 
 	for i := 0; i < len(numbersDigits); i++ {
 
