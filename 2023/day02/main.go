@@ -1,67 +1,94 @@
-package main
+package day02
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-	"strconv"
 	"strings"
+
+	"github.com/orlando-pt/aoc/2023/utils"
 )
 
-func main() {
+func Part1(lines []string) int {
 	totalIdGames := 0
 
 	gameMap := make(map[string]int)
-	// validGame := true
-	fileScanner := readFile("input.txt")
+	validGame := true
 
-	for fileScanner.Scan() {
-        resetCubeNumbersSol2(&gameMap)
-		line := fileScanner.Text()
-
+	for _, line := range lines {
 		game := strings.Split(line, ":")
-		// gameId, _ := strconv.Atoi(strings.Split(game[0], " ")[1])
+		gameId := utils.StrToInt(strings.Split(game[0], " ")[1])
 		gamePlays := game[1]
 
 		plays := strings.Split(gamePlays, ";")
 
 		for _, play := range plays {
 
-			// resetCubeNumbers(&gameMap)
+			resetCubeNumbers(&gameMap)
 			cubeSets := strings.Split(play, ",")
 
 			for _, cubeSet := range cubeSets {
 				cubeSet = strings.TrimSpace(cubeSet)
 				cubeInfo := strings.Split(cubeSet, " ")
-				numberCubes, _ := strconv.Atoi(cubeInfo[0])
+				numberCubes := utils.StrToInt(cubeInfo[0])
 				cubeColor := cubeInfo[1]
 
-				// if !decrementCubes(&gameMap, cubeColor, numberCubes) {
-				// 	validGame = false
-				// 	break
-				// }
-                updateMapCubes(&gameMap, cubeColor, numberCubes)
+				if !decrementCubes(&gameMap, cubeColor, numberCubes) {
+					validGame = false
+					break
+				}
+				updateMapCubes(&gameMap, cubeColor, numberCubes)
 			}
 
-			// if !validGame {
-			// 	break
-			// }
-            // resetCubeNumbers(&gameMap)
+			if !validGame {
+				break
+			}
+			resetCubeNumbers(&gameMap)
 		}
 
-        // if validGame {
-        //     totalIdGames += gameId
-        // }
-        // validGame = true
-
-        totalIdGames += multiplyCubes(&gameMap)
+		if validGame {
+		    totalIdGames += gameId
+		}
+		validGame = true
 	}
 
-    fmt.Println("Total Id Games:", totalIdGames)
+	return totalIdGames
+}
+
+func Part2(lines []string) int {
+	totalIdGames := 0
+
+	gameMap := make(map[string]int)
+
+	for _, line := range lines {
+		resetCubeNumbersSol2(&gameMap)
+
+		game := strings.Split(line, ":")
+		gamePlays := game[1]
+
+		plays := strings.Split(gamePlays, ";")
+
+		for _, play := range plays {
+
+			cubeSets := strings.Split(play, ",")
+
+			for _, cubeSet := range cubeSets {
+				cubeSet = strings.TrimSpace(cubeSet)
+				cubeInfo := strings.Split(cubeSet, " ")
+				numberCubes := utils.StrToInt(cubeInfo[0])
+				cubeColor := cubeInfo[1]
+
+				updateMapCubes(&gameMap, cubeColor, numberCubes)
+			}
+
+		}
+
+		totalIdGames += multiplyCubes(&gameMap)
+	}
+
+	return totalIdGames
+
 }
 
 func multiplyCubes(gameMap *map[string]int) int {
-    return (*gameMap)["red"] * (*gameMap)["green"] * (*gameMap)["blue"]
+	return (*gameMap)["red"] * (*gameMap)["green"] * (*gameMap)["blue"]
 }
 
 func decrementCubes(gameMap *map[string]int, cubeColor string, numberCubes int) bool {
@@ -71,9 +98,9 @@ func decrementCubes(gameMap *map[string]int, cubeColor string, numberCubes int) 
 }
 
 func updateMapCubes(gameMap *map[string]int, cubeColor string, numberCubes int) {
-    if (*gameMap)[cubeColor] < numberCubes {
-        (*gameMap)[cubeColor] = numberCubes
-    }
+	if (*gameMap)[cubeColor] < numberCubes {
+		(*gameMap)[cubeColor] = numberCubes
+	}
 }
 
 func resetCubeNumbers(gameMap *map[string]int) {
@@ -82,17 +109,4 @@ func resetCubeNumbers(gameMap *map[string]int) {
 
 func resetCubeNumbersSol2(gameMap *map[string]int) {
 	(*gameMap)["red"], (*gameMap)["green"], (*gameMap)["blue"] = 0, 0, 0
-}
-
-func readFile(fileName string) *bufio.Scanner {
-	readFile, err := os.Open("input.txt")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-
-	return fileScanner
 }

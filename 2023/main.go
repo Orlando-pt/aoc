@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"github.com/orlando-pt/aoc/2023/day01"
+	"github.com/orlando-pt/aoc/2023/day02"
+    "github.com/orlando-pt/aoc/2023/day03"
 	"github.com/orlando-pt/aoc/2023/internal"
 )
 
@@ -26,6 +28,10 @@ func main() {
 	switch day {
 	case "01":
 		runDay(day, day01.Part1, day01.Part2, input)
+	case "02":
+		runDay(day, day02.Part1, day02.Part2, input)
+	case "03":
+		runDay(day, day03.Part1, day03.Part2, input)
 	default:
 		log.Fatalf("Day %s not implemented yet! Or doesn't exist.\n", day)
 	}

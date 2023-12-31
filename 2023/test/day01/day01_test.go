@@ -8,7 +8,7 @@ import (
 )
 
 func TestPart1(t *testing.T) {
-	input, err := reader.ReadFileLines("input01.txt")
+	input, err := reader.ReadFileLines("01.txt")
 
 	if err != nil {
 		t.Fatalf("Error reading input file: %v\n", err)
@@ -22,7 +22,7 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
-	input, err := reader.ReadFileLines("input02.txt")
+	input, err := reader.ReadFileLines("02.txt")
 
 	if err != nil {
 		t.Fatalf("Error reading input file: %v\n", err)

@@ -1,34 +1,22 @@
-package main
+package day03
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 )
 
 const (
 	LINELENGTH int = 140
 )
 
-func main() {
-    readFile, err := os.Open("input.txt")
+func Part1(lines []string) int {
 
-    if err != nil {
-        fmt.Println(err)
-    }
-    fileScanner := bufio.NewScanner(readFile)
-    fileScanner.Split(bufio.ScanLines)
-    var fileLines []string
-
-    for fileScanner.Scan() {
-        fileLines = append(fileLines, fileScanner.Text())
-    }
-
-    readFile.Close()
-
-    for _, line := range fileLines {
+    for _, line := range lines {
         fmt.Println(line)
     }
 
+    return 0
 }
 
+func Part2(lines []string) int {
+    return 0
+}
