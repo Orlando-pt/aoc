@@ -33,7 +33,27 @@ func Part1(lines []string) int {
 }
 
 func Part2(lines []string) int {
-	return 0
+	ret := 0
+	numbers, specialCharsCoords := parseLines(lines)
+
+    var adjacentNumbers []string
+    for _, specialCoord := range specialCharsCoords {
+        if lines[specialCoord.x][specialCoord.y] != '*' {
+            continue
+        }
+
+        adjacentNumbers = make([]string, 0)
+        for _, number := range numbers {
+            if specialCoord.isAdjacentNumber(number) {
+                adjacentNumbers = append(adjacentNumbers, number.val)
+            }
+        }
+
+        if len(adjacentNumbers) == 2 {
+            ret += utils.StrToInt(adjacentNumbers[0]) * utils.StrToInt(adjacentNumbers[1])
+        }
+    }
+	return ret
 }
 
 func (c Coord) isAdjacent(other Coord) bool {
