@@ -3,7 +3,7 @@ package day03
 import (
 	"testing"
 
-	"github.com/orlando-pt/aoc/2023/day03"
+	"github.com/orlando-pt/aoc/2023/solution/day03"
 	reader "github.com/orlando-pt/aoc/2023/internal"
 )
 

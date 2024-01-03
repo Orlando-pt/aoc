@@ -1,10 +1,10 @@
-package day04
+package day05
 
 import (
 	"testing"
 
 	reader "github.com/orlando-pt/aoc/2023/internal"
-    "github.com/orlando-pt/aoc/2023/solution/day04"
+    "github.com/orlando-pt/aoc/2023/solution/day05"
 )
 
 func TestPart1(t *testing.T) {
@@ -14,7 +14,7 @@ func TestPart1(t *testing.T) {
 		t.Fatalf("Error reading input file: %v\n", err)
 	}
 
-	result := day04.Part1(input)
+	result := day05.Part1(input)
 
 	if result != 13 {
 		t.Errorf("Expected 13, got %d", result)
@@ -28,7 +28,7 @@ func TestPart2(t *testing.T) {
 		t.Fatalf("Error reading input file: %v\n", err)
 	}
 
-	result := day04.Part2(input)
+	result := day05.Part2(input)
 
 	if result != 30 {
 		t.Errorf("Expected 30, got %d", result)

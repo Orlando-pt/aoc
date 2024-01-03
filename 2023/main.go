@@ -6,10 +6,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/orlando-pt/aoc/2023/day01"
-	"github.com/orlando-pt/aoc/2023/day02"
-	"github.com/orlando-pt/aoc/2023/day03"
-	"github.com/orlando-pt/aoc/2023/day04"
+	"github.com/orlando-pt/aoc/2023/solution/day01"
+	"github.com/orlando-pt/aoc/2023/solution/day02"
+	"github.com/orlando-pt/aoc/2023/solution/day03"
+	"github.com/orlando-pt/aoc/2023/solution/day04"
 	"github.com/orlando-pt/aoc/2023/internal"
 )
 
