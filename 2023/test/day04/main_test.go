@@ -20,3 +20,17 @@ func TestPart1(t *testing.T) {
 		t.Errorf("Expected 13, got %d", result)
 	}
 }
+
+func TestPart2(t *testing.T) {
+	input, err := reader.ReadFileLines("01.txt")
+
+	if err != nil {
+		t.Fatalf("Error reading input file: %v\n", err)
+	}
+
+	result := day04.Part2(input)
+
+	if result != 30 {
+		t.Errorf("Expected 30, got %d", result)
+	}
+}
