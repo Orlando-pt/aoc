@@ -16,37 +16,47 @@ func Part1(lines []string) int {
 
 	for _, seed := range parseInput.seeds {
 
-        seed = getNext(seed, parseInput.seed2soil)
-        seed = getNext(seed, parseInput.soil2fertilizer)
-        seed = getNext(seed, parseInput.fertilizer2water)
-        seed = getNext(seed, parseInput.water2light)
-        seed = getNext(seed, parseInput.light2temperature)
-        seed = getNext(seed, parseInput.temperature2humidity)
-        seed = getNext(seed, parseInput.humidity2location)
+		seed = getNext(seed, parseInput.seed2soil)
+		seed = getNext(seed, parseInput.soil2fertilizer)
+		seed = getNext(seed, parseInput.fertilizer2water)
+		seed = getNext(seed, parseInput.water2light)
+		seed = getNext(seed, parseInput.light2temperature)
+		seed = getNext(seed, parseInput.temperature2humidity)
+		seed = getNext(seed, parseInput.humidity2location)
 
-        if seed < minLocation {
-            minLocation = seed
-        }
+		if seed < minLocation {
+			minLocation = seed
+		}
 	}
 
 	return minLocation
 }
 
-func getNext(seed int, attribution []SourceDestination) int {
-    for _, attr := range attribution {
-        if seed >= attr.source && seed < attr.source+attr.interval {
-            seed = attr.destination + (seed - attr.source)
-            break
-        }
-    }
-
-    return seed
-}
-
 func Part2(lines []string) int {
-	ret := 0
+	parseInput := parseInput(lines)
 
-	return ret
+	minLocation := math.MaxInt32
+
+
+	for i := 0; i < len(parseInput.seeds); i += 2 {
+		for lower := parseInput.seeds[i]; lower < parseInput.seeds[i]+parseInput.seeds[i+1]; lower++ {
+            seed := lower
+
+			seed = getNext(seed, parseInput.seed2soil)
+			seed = getNext(seed, parseInput.soil2fertilizer)
+			seed = getNext(seed, parseInput.fertilizer2water)
+			seed = getNext(seed, parseInput.water2light)
+			seed = getNext(seed, parseInput.light2temperature)
+			seed = getNext(seed, parseInput.temperature2humidity)
+			seed = getNext(seed, parseInput.humidity2location)
+
+			if seed < minLocation {
+				minLocation = seed
+			}
+		}
+	}
+
+	return minLocation
 }
 
 type SourceDestination struct {
@@ -64,6 +74,17 @@ type InputData struct {
 	light2temperature    []SourceDestination
 	temperature2humidity []SourceDestination
 	humidity2location    []SourceDestination
+}
+
+func getNext(seed int, attribution []SourceDestination) int {
+	for _, attr := range attribution {
+		if seed >= attr.source && seed < attr.source+attr.interval {
+			seed = attr.destination + (seed - attr.source)
+			break
+		}
+	}
+
+	return seed
 }
 
 func parseInput(lines []string) InputData {

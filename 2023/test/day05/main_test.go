@@ -21,16 +21,16 @@ func TestPart1(t *testing.T) {
 	}
 }
 
-// func TestPart2(t *testing.T) {
-// 	input, err := reader.ReadFileLines("01.txt")
-//
-// 	if err != nil {
-// 		t.Fatalf("Error reading input file: %v\n", err)
-// 	}
-//
-// 	result := day05.Part2(input)
-//
-// 	if result != 30 {
-// 		t.Errorf("Expected 30, got %d", result)
-// 	}
-// }
+func TestPart2(t *testing.T) {
+	input, err := reader.ReadFileLines("01.txt")
+
+	if err != nil {
+		t.Fatalf("Error reading input file: %v\n", err)
+	}
+
+	result := day05.Part2(input)
+
+	if result != 46 {
+		t.Errorf("Expected 46, got %d", result)
+	}
+}
