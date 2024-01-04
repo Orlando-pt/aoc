@@ -6,11 +6,12 @@ import (
 	"os"
 	"time"
 
+	"github.com/orlando-pt/aoc/2023/internal"
 	"github.com/orlando-pt/aoc/2023/solution/day01"
 	"github.com/orlando-pt/aoc/2023/solution/day02"
 	"github.com/orlando-pt/aoc/2023/solution/day03"
 	"github.com/orlando-pt/aoc/2023/solution/day04"
-	"github.com/orlando-pt/aoc/2023/internal"
+	"github.com/orlando-pt/aoc/2023/solution/day05"
 )
 
 func main() {
@@ -33,8 +34,10 @@ func main() {
 		runDay(day, day02.Part1, day02.Part2, input)
 	case "03":
 		runDay(day, day03.Part1, day03.Part2, input)
-    case "04":
-        runDay(day, day04.Part1, day04.Part2, input)
+	case "04":
+		runDay(day, day04.Part1, day04.Part2, input)
+	case "05":
+		runDay(day, day05.Part1, day05.Part2, input)
 	default:
 		log.Fatalf("Day %s not implemented yet! Or doesn't exist.\n", day)
 	}
