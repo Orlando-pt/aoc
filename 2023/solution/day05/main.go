@@ -37,10 +37,9 @@ func Part2(lines []string) int {
 
 	minLocation := math.MaxInt32
 
-
 	for i := 0; i < len(parseInput.seeds); i += 2 {
 		for lower := parseInput.seeds[i]; lower < parseInput.seeds[i]+parseInput.seeds[i+1]; lower++ {
-            seed := lower
+			seed := lower
 
 			seed = getNext(seed, parseInput.seed2soil)
 			seed = getNext(seed, parseInput.soil2fertilizer)
