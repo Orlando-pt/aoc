@@ -7,6 +7,9 @@ build
 # Intellij
 .idea
 out
+
+# Vscode
+.vscode
  
 # eclipse
 /.apt_generated

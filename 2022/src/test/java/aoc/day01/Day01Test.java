@@ -1,9 +1,9 @@
 package aoc.day01;
 
-
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
+import aoc.internal.Reader;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,26 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Day01Test {
 
     @Test
-    public void testPart1(){
-        // Given
-        List<String> input = Collections.singletonList("test");
+    public void testPart1() {
+        List<String> input = Reader.readFile(Reader.getTestResourceAsStream("01"));
 
-        // When
         String result = new Day01().part1(input);
 
-        // Then
-        assertEquals(input.get(0), result);
+        assertEquals("24000", result);
     }
 
     @Test
-    public void testPart2(){
-        // Given
-        List<String> input = Collections.singletonList("test");
+    public void testPart2() {
+        List<String> input = Reader.readFile(Reader.getTestResourceAsStream("01"));
 
-        // When
         String result = new Day01().part2(input);
 
-        // Then
-        assertEquals(input.get(0), result);
+        assertEquals("45000", result);
     }
 }
