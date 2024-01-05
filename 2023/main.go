@@ -13,6 +13,7 @@ import (
 	"github.com/orlando-pt/aoc/2023/solution/day04"
 	"github.com/orlando-pt/aoc/2023/solution/day05"
 	"github.com/orlando-pt/aoc/2023/solution/day06"
+	"github.com/orlando-pt/aoc/2023/solution/day07"
 )
 
 func main() {
@@ -41,6 +42,8 @@ func main() {
 		runDay(day, day05.Part1, day05.Part2, input)
 	case "06":
 		runDay(day, day06.Part1, day06.Part2, input)
+	case "07":
+		runDay(day, day07.Part1, day07.Part2, input)
 	default:
 		log.Fatalf("Day %s not implemented yet! Or doesn't exist.\n", day)
 	}
