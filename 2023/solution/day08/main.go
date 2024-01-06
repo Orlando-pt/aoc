@@ -1,75 +1,65 @@
 package day08
 
-import (
-	"fmt"
-	"strings"
-)
-
-const start = "AAA"
-const end = "ZZZ"
+import "strings"
 
 func Part1(lines []string) int {
 	instructions := parseLines(lines)
 
+	return instructions.find("AAA", func(location string) bool {
+		return location == "ZZZ"
+	})
+}
+
+func (ins instructions) find(start string, foundObjective func(string) bool) int {
 	currentLocation := start
 	currentDirectionIdx := 0
-	path := ""
+	steps := 0
 
-	for currentLocation != end {
-		if instructions.directions[currentDirectionIdx] == 'L' {
-			currentLocation = instructions.navigationMap[currentLocation][0]
-			path += "L"
+	for !foundObjective(currentLocation) {
+		if ins.directions[currentDirectionIdx] == 'L' {
+			currentLocation = ins.navigationMap[currentLocation][0]
 		} else {
-			currentLocation = instructions.navigationMap[currentLocation][1]
-			path += "R"
+			currentLocation = ins.navigationMap[currentLocation][1]
 		}
 
-		currentDirectionIdx = (currentDirectionIdx + 1) % len(instructions.directions)
+		steps += 1
+		currentDirectionIdx = (currentDirectionIdx + 1) % len(ins.directions)
 	}
-
-	fmt.Println(path)
-	return len(path)
+	return steps
 }
 
 func Part2(lines []string) int {
 	instructions := parseLines(lines)
 
 	startingPoints := instructions.getStartingPoints()
-	currentDirectionIdx := 0
-	steps := 0
+	var solutions []int
 
-	for !solved(startingPoints) {
-		startingPoints = instructions.navigationMap.getNextLocations(
-			startingPoints, rune(instructions.directions[currentDirectionIdx]))
-
-		currentDirectionIdx = (currentDirectionIdx + 1) % len(instructions.directions)
-		steps++
-
+	for _, startingPoint := range startingPoints {
+		solutions = append(solutions, instructions.find(startingPoint, func(location string) bool {
+			return location[2] == 'Z'
+		}))
 	}
-
-	fmt.Println(startingPoints)
-	return steps
+	return lcmAll(solutions)
 }
 
-func solved(locations []string) bool {
-	for _, location := range locations {
-		if location[2] != 'Z' {
-			return false
-		}
+func gcd(a, b int) int {
+	if b == 0 {
+		return a
 	}
-	return true
+	return gcd(b, a%b)
 }
 
-func (nav navigation) getNextLocations(locations []string, direction rune) []string {
-	var nextLocations []string
-	for _, location := range locations {
-		if direction == 'L' {
-			nextLocations = append(nextLocations, nav[location][0])
-		} else {
-			nextLocations = append(nextLocations, nav[location][1])
-		}
+func lcm(a, b int) int {
+	return a * b / gcd(a, b)
+}
+
+func lcmAll(numbers []int) int {
+	multiple := numbers[0]
+	for _, n := range numbers[1:] {
+		multiple = lcm(multiple, n)
 	}
-	return nextLocations
+
+	return multiple
 }
 
 func (instructions instructions) getStartingPoints() []string {

@@ -18,14 +18,14 @@ func TestPart1(t *testing.T) {
 	}
 
 	result := day08.Part1(input)
-    result2 := day08.Part1(input2)
+	result2 := day08.Part1(input2)
 
 	if result != 2 {
 		t.Errorf("Expected 2, got %d", result)
 	}
-    if result2 != 6 {
-        t.Errorf("Expected 6, got %d", result2)
-    }
+	if result2 != 6 {
+		t.Errorf("Expected 6, got %d", result2)
+	}
 }
 
 func TestPart2(t *testing.T) {
