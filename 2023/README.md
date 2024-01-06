@@ -18,8 +18,13 @@ Let's dominate AoC 🎄! My goal is **not to get 50 stars, with a great solution
 I firstly test my solutions in the `test` folder. Here is an example:
 
 ```shell
-cd test/day01 
-go test
+make test d=01
+```
+
+or
+
+```shell
+go test ./test/day01
 ```
 
 The solutions are executed from the root folder like this:
@@ -28,10 +33,12 @@ The solutions are executed from the root folder like this:
 go run . 01
 ```
 
+The output has the following structure(no spoilers):
+
 ```
 ===== 01 =====
-Part 1: 54597
+Part 1: 5459
 Part 1 took 53.584µs
-Part 2: 54504
+Part 2: 5454
 Part 2 took 11.4055ms
 ```

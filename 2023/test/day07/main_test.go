@@ -34,7 +34,7 @@ func TestPart2(t *testing.T) {
 
 	result := day07.Part2(input)
 
-	if result != 0 {
-		t.Errorf("Expected 71503, got %d", result)
+	if result != 5905 {
+		t.Errorf("Expected 5905, got %d", result)
 	}
 }
