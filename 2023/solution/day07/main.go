@@ -14,7 +14,7 @@ const cardsPart2 = "AKQT98765432J"
 func Part1(lines []string) int {
 	game := parseLines(lines)
 
-	game.sort()
+	game.sort(false)
 
 	ret := 0
 	for i, h := range game.hands {
@@ -26,7 +26,7 @@ func Part1(lines []string) int {
 func Part2(lines []string) int {
 	game := parseLines(lines)
 
-	game.sortPart2()
+	game.sort(true)
 
 	ret := 0
 	for i, h := range game.hands {
@@ -36,49 +36,36 @@ func Part2(lines []string) int {
 	return ret
 }
 
-func (game Game) sort() {
+func (game Game) sort(part2 bool) {
 	hands := game.hands
 	sort.Slice(hands, func(i, j int) bool {
-		code1 := findStrongestHand(hands[i])
-		code2 := findStrongestHand(hands[j])
+		var code1, code2 int
+		if part2 {
+			code1 = findStrongestHandPart2(hands[i])
+			code2 = findStrongestHandPart2(hands[j])
+		} else {
+			code1 = findStrongestHand(hands[i])
+			code2 = findStrongestHand(hands[j])
+		}
 
 		if code1 == code2 {
-			return !hands[i].isStronger(hands[j])
+			return !hands[i].isStronger(hands[j], part2)
 		}
 
 		return code1 < code2
 	})
 }
 
-func (game Game) sortPart2() {
-	hands := game.hands
-	sort.Slice(hands, func(i, j int) bool {
-		code1 := findStrongestHandPart2(hands[i])
-		code2 := findStrongestHandPart2(hands[j])
-
-		if code1 == code2 {
-			return !hands[i].isStrongerPart2(hands[j])
-		}
-
-		return code1 < code2
-	})
-}
-
-func (h1 Hand) isStronger(h2 Hand) bool {
+func (h1 Hand) isStronger(h2 Hand, part2 bool) bool {
 	for i := 0; i < len(cards); i++ {
-		h1Index := strings.Index(cards, string(h1.cards[i]))
-		h2Index := strings.Index(cards, string(h2.cards[i]))
-
-		if h1Index != h2Index {
-			return h1Index < h2Index
+		var h1Index, h2Index int
+		if part2 {
+			h1Index = strings.Index(cardsPart2, string(h1.cards[i]))
+			h2Index = strings.Index(cardsPart2, string(h2.cards[i]))
+		} else {
+			h1Index = strings.Index(cards, string(h1.cards[i]))
+			h2Index = strings.Index(cards, string(h2.cards[i]))
 		}
-	}
-	return false
-}
-func (h1 Hand) isStrongerPart2(h2 Hand) bool {
-	for i := 0; i < len(cardsPart2); i++ {
-		h1Index := strings.Index(cardsPart2, string(h1.cards[i]))
-		h2Index := strings.Index(cardsPart2, string(h2.cards[i]))
 
 		if h1Index != h2Index {
 			return h1Index < h2Index
@@ -89,7 +76,7 @@ func (h1 Hand) isStrongerPart2(h2 Hand) bool {
 
 func findStrongestHand(hand Hand) int {
 	var repeatedCards []int
-	for _, c := range distinct(hand.cards) {
+	for _, c := range distinct(hand.cards, "") {
 		repeatedCards = append(repeatedCards, strings.Count(hand.cards, string(c)))
 	}
 
@@ -98,9 +85,9 @@ func findStrongestHand(hand Hand) int {
 
 func findStrongestHandPart2(hand Hand) int {
 
-	distinctCards := distinctNoJ(hand.cards)
+	distinctCards := distinct(hand.cards, "J")
 
-    possibleHands := []string{hand.cards}
+	possibleHands := []string{hand.cards}
 
 	// replace cards for J
 	if strings.Contains(hand.cards, "J") {
@@ -112,8 +99,8 @@ func findStrongestHandPart2(hand Hand) int {
 
 	highestHandCode := 0
 	for _, h := range possibleHands {
-        repeatedCards := []int{}
-		for _, c := range distinct(h) {
+		repeatedCards := []int{}
+		for _, c := range distinct(h, "") {
 			repeatedCards = append(repeatedCards, strings.Count(h, string(c)))
 		}
 
@@ -158,20 +145,10 @@ func getHandCode(repeatedCards []int) int {
 	return code
 }
 
-func distinct(s string) string {
+func distinct(s string, except string) string {
 	var distinct string
 	for _, c := range s {
-		if strings.Index(distinct, string(c)) == -1 {
-			distinct += string(c)
-		}
-	}
-	return distinct
-}
-
-func distinctNoJ(s string) string {
-	var distinct string
-	for _, c := range s {
-		if strings.Index(distinct, string(c)) == -1 && string(c) != "J" {
+		if strings.Index(distinct, string(c)) == -1 && string(c) != except {
 			distinct += string(c)
 		}
 	}
