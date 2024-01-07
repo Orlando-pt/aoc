@@ -1,9 +1,5 @@
 package day10
 
-import (
-	"fmt"
-)
-
 const (
 	ns     = '|'
 	ew     = '-'
@@ -20,18 +16,18 @@ func Part1(lines []string) int {
 
 	surroundings := start.findPossibleSurroundings(lines)
 
-	var possibleSteps []int
+	var paths [][]coordinate
 	for _, surrounding := range surroundings {
-		possibleSteps = append(possibleSteps, surrounding.findLoop(lines, start))
+		paths = append(paths, surrounding.findLoop(lines, start))
 
 	}
 
 	// find duplicates
 	steps := 0
-	for i := 0; i < len(possibleSteps); i++ {
-		for j := i + 1; j < len(possibleSteps); j++ {
-			if possibleSteps[i] == possibleSteps[j] {
-				steps = possibleSteps[i]
+	for i := 0; i < len(paths); i++ {
+		for j := i + 1; j < len(paths); j++ {
+			if len(paths[i]) == len(paths[j]) {
+				steps = len(paths[i])
 				break
 			}
 		}
@@ -39,13 +35,106 @@ func Part1(lines []string) int {
 			break
 		}
 	}
-	fmt.Println(steps)
-
 	return steps / 2
 }
 
+// Thanks to:
+// https://github.com/ColasNahaboo/advent-of-code-my-solutions/blob/main/go/2023/days/d10/d10.go
 func Part2(lines []string) int {
-	return 0
+	start := findStart(lines)
+
+	surroundings := start.findPossibleSurroundings(lines)
+
+	var paths [][]coordinate
+	for _, surrounding := range surroundings {
+		paths = append(paths, surrounding.findLoop(lines, start))
+
+	}
+
+	// find duplicates
+	var path []coordinate
+	for i := 0; i < len(paths); i++ {
+		for j := i + 1; j < len(paths); j++ {
+			if len(paths[i]) == len(paths[j]) {
+				path = paths[i]
+				break
+			}
+		}
+		if len(path) != 0 {
+			break
+		}
+	}
+
+	if len(path) == 0 {
+		panic("no path found")
+	}
+
+    // replace the loop with a start pipe
+    line := []byte(lines[start.y])
+    line[start.x] = findStartPipe(path[0], path[len(path)-2])
+    lines[start.y] = string(line)
+
+	return calculateContainedTiles(path, lines)
+}
+
+func findStartPipe(c1, c2 coordinate) byte {
+    if c1.x == c2.x {
+        return ns
+    }
+    if c1.y == c2.y {
+        return ew
+    }
+    if c1.x < c2.x {
+        if c2.y < c1.y {
+            return nw
+        }
+        return sw
+    }
+    if c2.y < c1.y {
+        return ne
+    }
+    return se
+}
+
+func calculateContainedTiles(path []coordinate, field []string) int {
+	// mark all places occupied by the loop
+	dim := len(field)
+	board := make([]bool, dim*dim, dim*dim)
+	for _, c := range path {
+		board[c.y*dim+c.x] = true
+	}
+
+	insiders := 0
+	for p := range board {
+		if board[p] {
+			continue
+		}
+
+		crosses := 0
+		for i := p; i >= 0; i -= dim {
+			if board[i] {
+				crosses += isCrossing(i, field)
+			}
+		}
+		if crosses%2 == 1 {
+			insiders++
+		}
+	}
+
+	return insiders
+}
+
+func isCrossing(pos int, field []string) int {
+	dim := len(field)
+	x := pos % dim
+	y := pos / dim
+
+	switch field[y][x] {
+	case ew, ne, se:
+		return 1
+	default:
+		return 0
+	}
 }
 
 func (c coordinate) findPossibleSurroundings(lines []string) []coordinate {
@@ -66,17 +155,16 @@ func (c coordinate) findPossibleSurroundings(lines []string) []coordinate {
 	return possibleSurroundings
 }
 
-func (c coordinate) findLoop(lines []string, last coordinate) int {
-	// fmt.Println(last, c, string(lines[c.y][c.x]))
+func (c coordinate) findLoop(lines []string, last coordinate) []coordinate {
 	if !c.isValid(len(lines)) || lines[c.y][c.x] == ground {
-		return 0
+		return []coordinate{}
 	}
 
 	if lines[c.y][c.x] == start {
-		return 1
+		return []coordinate{c}
 	}
 
-	return 1 + c.nextMove(last, rune(lines[c.y][c.x])).findLoop(lines, c)
+	return append([]coordinate{c}, c.nextMove(last, rune(lines[c.y][c.x])).findLoop(lines, c)...)
 }
 
 func findStart(lines []string) coordinate {
