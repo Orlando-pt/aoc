@@ -10,6 +10,20 @@ func Part1(lines []string) int {
 	})
 }
 
+func Part2(lines []string) int {
+	instructions := parseLines(lines)
+
+	startingPoints := instructions.getStartingPoints()
+	var solutions []int
+
+	for _, startingPoint := range startingPoints {
+		solutions = append(solutions, instructions.find(startingPoint, func(location string) bool {
+			return location[2] == 'Z'
+		}))
+	}
+	return lcmAll(solutions)
+}
+
 func (ins instructions) find(start string, foundObjective func(string) bool) int {
 	currentLocation := start
 	currentDirectionIdx := 0
@@ -28,20 +42,6 @@ func (ins instructions) find(start string, foundObjective func(string) bool) int
 	return steps
 }
 
-func Part2(lines []string) int {
-	instructions := parseLines(lines)
-
-	startingPoints := instructions.getStartingPoints()
-	var solutions []int
-
-	for _, startingPoint := range startingPoints {
-		solutions = append(solutions, instructions.find(startingPoint, func(location string) bool {
-			return location[2] == 'Z'
-		}))
-	}
-	return lcmAll(solutions)
-}
-
 func gcd(a, b int) int {
 	if b == 0 {
 		return a
@@ -53,6 +53,7 @@ func lcm(a, b int) int {
 	return a * b / gcd(a, b)
 }
 
+// thanks to github.com/Guergeiro
 func lcmAll(numbers []int) int {
 	multiple := numbers[0]
 	for _, n := range numbers[1:] {

@@ -10,6 +10,7 @@ Let's dominate AoC 🎄! My goal is **not to get 50 stars, with a great solution
 - [Day06](./solution/day06) ★★
 - [Day07](./solution/day07) ★★
 - [Day08](./solution/day08) ★☆
+- [Day09](./solution/day09) ★☆
 
 ★ = completed the solution
 ☆ = had to get help
