@@ -1,6 +1,10 @@
-# Advent of Code Java Starter project
+# Advent of Code 2022 in Java
 
-A project to get you started solving [Advent of Code](https://adventofcode.com/) challenge in Java.
+Year 2022 is the year to consolidate Java knowledge. The following content is from the original repository
+that is used as a template for this year's journey.
+
+I created a custom [Makefile](./Makefile) to simplify the build and run process. Feel free to use it or
+adapt it to your needs.
 
 ## Architecture
 

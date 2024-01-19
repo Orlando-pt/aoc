@@ -8,8 +8,6 @@ import (
 )
 
 func TestPart1(t *testing.T) {
-	t.Parallel()
-
 	input, err := reader.ReadFileLines("01.txt")
 
 	if err != nil {
@@ -24,8 +22,6 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
-	t.Parallel()
-
 	input, err := reader.ReadFileLines("01.txt")
 
 	if err != nil {
@@ -34,7 +30,7 @@ func TestPart2(t *testing.T) {
 
 	result := day11.Part2(input)
 
-	if result != 0 {
-		t.Errorf("Expected 0, got %d", result)
+	if result != 1030 {
+		t.Errorf("Expected 1030, got %d", result)
 	}
 }

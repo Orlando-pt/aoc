@@ -1,6 +1,6 @@
-# Advent of Code 2023 in Go 🐭
+# Advent of Code 2023 in Go
 
-Let's dominate AoC 🎄! My goal is **not to get 50 stars, with a great solution**, I do AoC to learn a new language in a fun way.
+Let's dominate AoC 2023 🎄!
 
 - [Day01](./solution/day01) ★★
 - [Day02](./solution/day02) ★★

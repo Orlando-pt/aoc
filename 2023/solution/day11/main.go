@@ -5,26 +5,59 @@ import (
 	"math"
 	"strings"
 )
+const decExpansion = 10
 
 func Part1(lines []string) int {
-	universe := parseInput(lines)
+	universe := parseInput(lines, false)
+	printUniverse(universe)
 
 	galaxies := findGalaxyCoordinates(universe)
+    fmt.Println(galaxies)
 
 	sum := 0
 	for i, galaxy := range galaxies {
 		for j := i + 1; j < len(galaxies); j++ {
 			distance := galaxy.manhattanDistance(galaxies[j])
-			fmt.Println(galaxy, galaxies[j], distance)
 			sum += distance
 		}
 	}
-	fmt.Println(galaxies)
 	return sum
 }
 
+func printUniverse(universe [][]int) {
+	for l, line := range universe {
+        fmt.Printf("%d: ", l)
+		for i, obj := range line {
+			if obj == 0 {
+				if i < 10 {
+					fmt.Printf(" %d ", i)
+				} else {
+
+					fmt.Printf("%d ", i)
+				}
+			} else {
+				fmt.Printf("*  ")
+			}
+		}
+		fmt.Println()
+	}
+}
+
 func Part2(lines []string) int {
-	return 0
+	universe := parseInput(lines, true)
+	printUniverse(universe)
+
+	galaxies := findGalaxyCoordinates(universe)
+    fmt.Println(galaxies)
+
+	sum := 0
+	for i, galaxy := range galaxies {
+		for j := i + 1; j < len(galaxies); j++ {
+			distance := galaxy.manhattanDistance(galaxies[j])
+			sum += distance
+		}
+	}
+	return sum
 }
 
 func (g galaxy) manhattanDistance(other galaxy) int {
@@ -63,7 +96,7 @@ type coordinate struct {
 	y int
 }
 
-func parseInput(lines []string) [][]int {
+func parseInput(lines []string, part2 bool) [][]int {
 	universe := [][]int{}
 
 	// check column idx expansions
@@ -90,11 +123,23 @@ func parseInput(lines []string) [][]int {
 	}
 
 	galaxyNr := 1
-	width := len(lines[0]) + len(verticalExpansionIdx)
+	var width int
+	if part2 {
+		width = len(lines[0]) + (len(verticalExpansionIdx) * decExpansion)
+	} else {
+		width = len(lines[0]) + len(verticalExpansionIdx)
+	}
 	for _, line := range lines {
 		if !strings.Contains(line, "#") {
-			universe = append(universe, make([]int, width))
-			universe = append(universe, make([]int, width))
+			var repeat int
+			if part2 {
+				repeat = decExpansion+1
+			} else {
+				repeat = 2
+			}
+			for i := 0; i < repeat; i++ {
+				universe = append(universe, make([]int, width))
+			}
 			continue
 		}
 
@@ -105,7 +150,7 @@ func parseInput(lines []string) [][]int {
 			case '.':
 				// do nothing
 			case '#':
-				measure[j+calculateOffset(verticalExpansionIdx, j)] = galaxyNr
+				measure[j+calculateOffset(verticalExpansionIdx, j, part2)] = galaxyNr
 				galaxyNr++
 			default:
 				panic("invalid character: " + string(char))
@@ -117,13 +162,17 @@ func parseInput(lines []string) [][]int {
 	return universe
 }
 
-func calculateOffset(vIdx []int, idx int) int {
+func calculateOffset(vIdx []int, idx int, part2 bool) int {
 	offset := 0
 
 	for _, i := range vIdx {
 		if idx > i {
 			offset++
 		}
+	}
+
+	if part2 {
+		return (offset * decExpansion)
 	}
 
 	return offset
