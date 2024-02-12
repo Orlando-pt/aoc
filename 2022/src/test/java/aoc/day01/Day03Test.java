@@ -14,6 +14,15 @@ public class Day03Test {
 
     String result = new Day03().part1(input);
 
-    assertEquals("12", result);
+    assertEquals("157", result);
+  }
+
+  @Test
+  public void testPart2() {
+    List<String> input = Reader.readFile(Reader.getTestResourceAsStream("03"));
+
+    String result = new Day03().part2(input);
+
+    assertEquals("70", result);
   }
 }
