@@ -1,4 +1,4 @@
-package aoc.day01;
+package aoc.day03;
 
 import aoc.Day;
 import java.util.ArrayList;

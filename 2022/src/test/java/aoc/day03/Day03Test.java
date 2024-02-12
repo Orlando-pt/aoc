@@ -1,4 +1,4 @@
-package aoc.day01;
+package aoc.day03;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

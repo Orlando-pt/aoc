@@ -4,8 +4,8 @@
 package aoc;
 
 import aoc.day01.Day01;
-import aoc.day01.Day02;
-import aoc.day01.Day03;
+import aoc.day02.Day02;
+import aoc.day03.Day03;
 import aoc.internal.Reader;
 import java.util.HashMap;
 import java.util.List;
