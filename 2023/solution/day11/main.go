@@ -11,6 +11,8 @@ func Part1(lines []string) (sum int) {
 	return computeDistances(lines, 1)
 }
 
+// thanks to:
+// https://github.com/ColasNahaboo/advent-of-code-my-solutions/blob/main/go/2023/days/d11/d11.go
 func Part2(lines []string) int {
 	univ = []int{}
 	return computeDistances(lines, 1000000-1)

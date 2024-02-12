@@ -12,7 +12,8 @@ Let's dominate AoC 2023 🎄!
 - [Day08](./solution/day08) ★☆
 - [Day09](./solution/day09) ★★
 - [Day10](./solution/day10) ★☆
-- [Day11](./solution/day11) ★★
+- [Day11](./solution/day11) ★☆
+- [Day12](./solution/day12) ★☆
 
 ★ = completed the solution
 ☆ = had to get help
