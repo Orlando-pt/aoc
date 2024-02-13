@@ -11,6 +11,7 @@ adapt it to your needs.
 - [Day01](./src/main/java/aoc/day01/Day01.java) ★★
 - [Day02](./src/main/java/aoc/day02/Day02.java) ★★
 - [Day03](./src/main/java/aoc/day03/Day03.java) ★★
+- [Day04](./src/main/java/aoc/day04/Day04.java) ★★
 
 ★ = completed the solution
 ☆ = had to get help

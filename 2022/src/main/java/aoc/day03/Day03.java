@@ -41,6 +41,7 @@ public class Day03 implements Day {
         res = commonChar - 'A' + 27;
       }
 
+      assert res > 0;
       return res;
     }
 
@@ -49,6 +50,7 @@ public class Day03 implements Day {
         if (sacks[1].contains(String.valueOf(c)) && sacks[2].contains(String.valueOf(c))) return c;
       }
 
+      assert false;
       return ' ';
     }
   }
@@ -62,6 +64,7 @@ public class Day03 implements Day {
         res = commonChar - 'A' + 27;
       }
 
+      assert res > 0;
       return res;
     }
 
@@ -72,6 +75,7 @@ public class Day03 implements Day {
         }
       }
 
+      assert false;
       return ' ';
     }
   }
