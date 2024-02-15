@@ -1,16 +1,11 @@
-# aoc-kotlin-starter
+# Advent of Code in Kotlin
 
-:sparkles: [Screenshots](#screenshots) :sparkles:
+Let's dominate AoC 2020 🎄!
 
-Starter template for solving [Advent of Code](https://adventofcode.com) in [Kotlin](https://kotlinlang.org/)
+- [Day01](./src/main/kotlin/days/Day1.kt) ★★
 
-### Features
-
-* Gradle setup so you can run a specific day or all days on the command line (see **Running** below)
-* Timings for each part of each day
-* Input for each day automatically exposed in String and List form
-* Junit and Hamcrest test libraries included (see **Testing** below)
-* Starter .gitignore
+★ = completed the solution
+☆ = had to get help
 
 ### Running
 
@@ -19,6 +14,7 @@ Project is already setup with gradle. To run the app:
 * Navigate to top-level directory on the command line
 * Run `./gradlew run` to run all days
 * Run `./gradlew run --args $DAY` where `$DAY` is an integer to run a specific day
+* Optional (running with Make): `make run d=1`
 
 ### Testing
 
@@ -27,6 +23,7 @@ Project includes Junit and Hamcrest and a stub unit test to get you going. To ru
 * Navigate to top-level directory on the command line
 * Run `./gradlew test`
 * Add `--info`, `--debug` or `--stacktrace` flags for more output
+* Optional (running with Make): `make test`
 
 ##### Test input
 
@@ -48,14 +45,3 @@ and how you can use the `inputList` and `inputString` mentioned above
 * A Day 1 test class also exists, mostly to show a few hamcrest matchers, and how test input files can differ from actual ones (see **Test input** section above).
 To get started with testing you can edit this class, and the input file at `src/test/resources/input_day_1.txt`
 
-### Screenshots
-
-Screenshots show fake data (not a real advent of code year!)
-
-##### Running all days
-
-![Running all days](/../screenshots/assets/run-all.png)
-
-##### Running a single day
-
-![Running a single day](/../screenshots/assets/run-one.png)
