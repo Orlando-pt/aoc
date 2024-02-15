@@ -1,10 +1,12 @@
-local day01 = require("solution.day01.day01")
-local day02 = require("solution.day02.day02")
 local reader = require("internal.reader")
+local day01 = require("solution.day01.main")
+local day02 = require("solution.day02.main")
+local day03 = require("solution.day03.main")
 
 local solutions = {}
 solutions["1"] = day01
 solutions["2"] = day02
+solutions["3"] = day03
 
 local function main()
   if arg[1] == nil then
@@ -18,7 +20,7 @@ local function main()
     return
   end
 
-  local lines = reader.read_file("01")
+  local lines = reader.read_file(string.format("%02d", arg[1]))
   print("Day " .. arg[1] .. ":")
   print("-----------------")
   local start = os.clock()

@@ -2,7 +2,9 @@
 
 Let's dominate AoC 2021 🎄!
 
-- [Day01](./solution/day01/day01.lua) ★★
+- [Day01](./solution/day01/main.lua) ★★
+- [Day02](./solution/day02/main.lua) ★★
+- [Day03](./solution/day03/main.lua) ★★
 
 ★ = completed the solution
 ☆ = had to get help
@@ -18,7 +20,7 @@ make test d=01
 or
 
 ```shell
-lua test/day01/day01.lua
+lua test/day01/main.lua
 ```
 
 The solutions are executed from the root folder like this:
