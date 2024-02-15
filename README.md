@@ -6,6 +6,7 @@ This repository is dedicated to my Advent of Code learning journey. The primary 
 
 ## Solutions by Year
 
+- [2020 (Kotlin)](./2020)
 - [2021 (Lua)](./2021)
 - [2022 (Java)](./2022)
 - [2023 (Go)](./2023)
