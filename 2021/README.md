@@ -2,7 +2,7 @@
 
 Let's dominate AoC 2021 🎄!
 
-- [Day01](./solution/day01) ★★
+- [Day01](./solution/day01/day01.lua) ★★
 
 ★ = completed the solution
 ☆ = had to get help
