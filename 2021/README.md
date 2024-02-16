@@ -5,6 +5,7 @@ Let's dominate AoC 2021 🎄!
 - [Day01](./solution/day01/main.lua) ★★
 - [Day02](./solution/day02/main.lua) ★★
 - [Day03](./solution/day03/main.lua) ★★
+- [Day04](./solution/day04/main.lua) ★★
 
 ★ = completed the solution
 ☆ = had to get help
@@ -34,10 +35,10 @@ The output has the following structure(no spoilers):
 ```
 Day 1:
 -----------------
-Part 1:         0
-Time:   1.1e-05
+Part 1:  0
+Time:    0.01s
 -----------------
-Part 2:         0
-Time:   4.05e-06
+Part 2:  2
+Time:    2.9s
 -----------------
 ```

@@ -11,4 +11,12 @@ function Utils.splitStr(inputstr, sep)
   return t
 end
 
+function Utils.tableSize(t)
+  local count = 0
+  for _ in pairs(t) do
+    count = count + 1
+  end
+  return count
+end
+
 return Utils
