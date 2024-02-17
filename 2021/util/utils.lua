@@ -19,4 +19,13 @@ function Utils.tableSize(t)
   return count
 end
 
+function Utils.sum(arr)
+  local sum = 0
+  for _, n in ipairs(arr) do
+    sum = sum + n
+  end
+
+  return sum
+end
+
 return Utils
