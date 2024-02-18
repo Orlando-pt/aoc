@@ -1,8 +1,6 @@
 package util
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.collection.IsIterableContainingInOrder.contains
-import org.hamcrest.core.Is.`is`
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class InputReaderTest {
@@ -10,12 +8,12 @@ class InputReaderTest {
     @Test
     fun testReadInputAsString() {
         val testInputAsString = InputReader.getInputAsString(1)
-        assertThat(testInputAsString, `is`("this\nis\na\ntest input\nfile\n"))
+        assertThat(testInputAsString).isEqualTo("1721\n979\n366\n299\n675\n1456")
     }
 
     @Test
     fun testReadInputAsList() {
         val testInputAsList = InputReader.getInputAsList(1)
-        assertThat(testInputAsList, contains("this", "is", "a", "test input", "file"))
+        assertThat(testInputAsList).contains("1721", "979", "366", "299", "675", "1456")
     }
 }
