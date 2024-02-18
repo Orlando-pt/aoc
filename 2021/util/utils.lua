@@ -28,4 +28,15 @@ function Utils.sum(arr)
   return sum
 end
 
+function Utils.max(arr)
+  local max = 0
+  for _, n in ipairs(arr) do
+    if n > max then
+      max = n
+    end
+  end
+
+  return max
+end
+
 return Utils

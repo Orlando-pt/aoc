@@ -1,5 +1,4 @@
 local utils = require("util.utils")
-local inspect = require("inspect")
 local Solution = {}
 
 local function parseLineToNumberArr(line)
@@ -26,9 +25,11 @@ end
 
 local function ageOneDay(numbers)
   local dead = numbers[1]
+
   for i = 1, #numbers - 1 do
     numbers[i] = numbers[i + 1]
   end
+
   numbers[7] = numbers[7] + dead
   numbers[9] = dead
 end
