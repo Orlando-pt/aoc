@@ -18,11 +18,16 @@ local function main()
 
   print("Day " .. arg[1] .. ":")
   print("-----------------")
+
   local start = os.clock()
+
   print("Part 1:  " .. day.part1(lines))
   print("Time:    " .. os.clock() - start .. "s")
+
   print("-----------------")
+
   start = os.clock()
+
   print("Part 2:  " .. day.part2(lines))
   print("Time:    " .. os.clock() - start .. "s")
   print("-----------------")
