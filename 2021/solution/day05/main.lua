@@ -1,4 +1,4 @@
-local utils = require("util.utils")
+local splitStr = require("util.utils").splitStr
 local Solution = {}
 
 local function initMatrix(x, y)
@@ -58,9 +58,9 @@ local function parseInput(lines)
   local coords = {}
 
   for _, line in ipairs(lines) do
-    local lineParts = utils.splitStr(line, " ")
-    local c1 = utils.splitStr(lineParts[1], ",")
-    local c2 = utils.splitStr(lineParts[3], ",")
+    local lineParts = splitStr(line, " ")
+    local c1 = splitStr(lineParts[1], ",")
+    local c2 = splitStr(lineParts[3], ",")
 
     local coord1 = { tonumber(c1[1]), tonumber(c1[2]) }
     local coord2 = { tonumber(c2[1]), tonumber(c2[2]) }

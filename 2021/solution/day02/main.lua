@@ -1,4 +1,4 @@
-local utils = require "util.utils"
+local splitStr = require("util.utils").splitStr
 local Solution = {}
 
 function Solution.part1(lines)
@@ -6,7 +6,7 @@ function Solution.part1(lines)
   local depth = 0
 
   for _, line in ipairs(lines) do
-    local lineParts = utils.splitStr(line, " ")
+    local lineParts = splitStr(line, " ")
 
     if lineParts[1] == "forward" then
       horizontal = horizontal + tonumber(lineParts[2])
@@ -26,7 +26,7 @@ function Solution.part2(lines)
   local aim = 0
 
   for _, line in ipairs(lines) do
-    local lineParts = utils.splitStr(line, " ")
+    local lineParts = splitStr(line, " ")
 
     if lineParts[1] == "forward" then
       horizontal = horizontal + tonumber(lineParts[2])

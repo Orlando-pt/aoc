@@ -1,9 +1,10 @@
-local utils = require("util.utils")
+local splitStr = require("util.utils").splitStr
+local max = require("util.utils").max
 
 local Solution = {}
 
 local function parseLine(line)
-  local parts = utils.splitStr(line, ",")
+  local parts = splitStr(line, ",")
   local numbers = {}
 
   for _, part in ipairs(parts) do
@@ -38,7 +39,7 @@ end
 
 function Solution.part2(lines)
   local numbers = parseLine(lines[1])
-  local max = utils.max(numbers)
+  local max = max(numbers)
 
   local fuel = math.maxinteger
   for i = 1, max do

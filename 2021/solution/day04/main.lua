@@ -1,4 +1,5 @@
-local utils = require "util.utils"
+local splitStr = require("util.utils").splitStr
+local tableSize = require("util.utils").tableSize
 
 local Solution = {}
 
@@ -12,7 +13,7 @@ local function addBool(boardLine)
 end
 
 local function parse(lines)
-  local numbers = utils.splitStr(lines[1], ",")
+  local numbers = splitStr(lines[1], ",")
 
   local boards = {}
   local i = 2
@@ -23,7 +24,7 @@ local function parse(lines)
     local board = {}
 
     while line and line ~= "" do
-      local lineParts = utils.splitStr(line, " ")
+      local lineParts = splitStr(line, " ")
       table.insert(board, addBool(lineParts))
 
       i = i + 1
@@ -155,7 +156,7 @@ function Solution.part2(lines)
       end
     end
 
-    if utils.tableSize(winners) == #boards then
+    if tableSize(winners) == #boards then
       break
     end
   end

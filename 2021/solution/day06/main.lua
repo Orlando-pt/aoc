@@ -1,8 +1,9 @@
-local utils = require("util.utils")
+local splitStr = require("util.utils").splitStr
+local sum = require("util.utils").sum
 local Solution = {}
 
 local function parseLineToNumberArr(line)
-  local numbers = utils.splitStr(line, ",")
+  local numbers = splitStr(line, ",")
   local result = {}
 
   -- init result with 0
@@ -40,7 +41,7 @@ function Solution.part1(lines)
     ageOneDay(numbers)
   end
 
-  return utils.sum(numbers)
+  return sum(numbers)
 end
 
 function Solution.part2(lines)
@@ -49,7 +50,7 @@ function Solution.part2(lines)
     ageOneDay(numbers)
   end
 
-  return utils.sum(numbers)
+  return sum(numbers)
 end
 
 return Solution
