@@ -39,4 +39,14 @@ function Utils.max(arr)
   return max
 end
 
+function Utils.hasValue(tab, val)
+  for _, v in ipairs(tab) do
+    if v == val then
+      return true
+    end
+  end
+
+  return false
+end
+
 return Utils

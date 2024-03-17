@@ -1,11 +1,11 @@
-local dayStr = "01"
+local dayStr = "08"
 local reader = require("internal.reader")
 local day = require("solution.day"..dayStr ..".main")
 
 local lines = reader.read_file(dayStr, true)
 
 local function part1Test()
-  local expected = 7
+  local expected = 26
   local result = day.part1(lines)
 
   assert(result == expected, "Expected " .. expected .. ", but got " .. result)

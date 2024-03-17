@@ -39,10 +39,10 @@ end
 
 function Solution.part2(lines)
   local numbers = parseLine(lines[1])
-  local max = max(numbers)
+  local maxNumbers = max(numbers)
 
   local fuel = math.maxinteger
-  for i = 1, max do
+  for i = 1, maxNumbers do
     local fuelSpent = 0
 
     for _, n in ipairs(numbers) do
