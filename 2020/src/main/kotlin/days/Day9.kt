@@ -40,8 +40,7 @@ class Day9 : Day(9) {
         var currentGoal = preamble
 
         while (currentGoal < numbers.size) {
-            val res = hasPreambleSum(numbers, currentGoal).not()
-            if (res) {
+            if (hasPreambleSum(numbers, currentGoal).not()) {
                 return Pair(numbers[currentGoal], currentGoal)
             }
             currentGoal++
