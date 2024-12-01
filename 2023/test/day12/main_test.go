@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	reader "github.com/orlando-pt/aoc/2023/internal"
-	"github.com/orlando-pt/aoc/2023/solution/day12"
+	day "github.com/orlando-pt/aoc/2023/solution/day12"
 )
 
 func TestPart1(t *testing.T) {
@@ -14,10 +14,11 @@ func TestPart1(t *testing.T) {
 		t.Fatalf("Error reading input file: %v\n", err)
 	}
 
-	result := day12.Part1(input)
+	result := day.Part1(input)
 
-	if result != 0 {
-		t.Errorf("Expected 0, got %d", result)
+    expected := 21
+	if result != expected {
+		t.Errorf("Expected %d, got %d", expected, result)
 	}
 }
 
@@ -28,9 +29,10 @@ func TestPart2(t *testing.T) {
 		t.Fatalf("Error reading input file: %v\n", err)
 	}
 
-	result := day12.Part2(input)
+	result := day.Part2(input)
 
-	if result != 0 {
-		t.Errorf("Expected 0, got %d", result)
+    expected := 525152
+	if result != expected {
+		t.Errorf("Expected %d, got %d", expected, result)
 	}
 }
