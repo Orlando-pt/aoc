@@ -8,6 +8,8 @@ import (
 
 	"github.com/orlando-pt/aoc/2024/internal"
 	"github.com/orlando-pt/aoc/2024/solution/day01"
+	"github.com/orlando-pt/aoc/2024/solution/day02"
+	"github.com/orlando-pt/aoc/2024/utils"
 )
 
 func main() {
@@ -15,7 +17,7 @@ func main() {
 		log.Fatalf("You need to provide both the day and the path to input!\n\t go run . <day>\n")
 	}
 
-	day := os.Args[1]
+	day := fmt.Sprintf("%02d", utils.StrToInt(os.Args[1]))
 	inputPath := "input/" + day + ".txt"
 
 	input, err := reader.ReadFileLines(inputPath)
@@ -26,6 +28,8 @@ func main() {
 	switch day {
 	case "01":
 		runDay(day, day01.Part1, day01.Part2, input)
+    case "02":
+        runDay(day, day02.Part1, day02.Part2, input)
 	default:
 		log.Fatalf("Day %s not implemented yet! Or doesn't exist.\n", day)
 	}

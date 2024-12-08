@@ -3,6 +3,7 @@
 Let's dominate AoC 2024 🎄!
 
 - [Day01](./solution/day01/main.go) ★★
+- [Day02](./solution/day02/main.go) ★★
 
 ★ = completed the solution
 ☆ = had to get help
