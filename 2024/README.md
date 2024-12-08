@@ -4,9 +4,9 @@ Let's dominate AoC 2024 🎄!
 
 - [Day01](./solution/day01/main.go) ★★
 - [Day02](./solution/day02/main.go) ★★
+- [Day03](./solution/day03/main.go) ★★
 
 ★ = completed the solution
-☆ = had to get help
 
 ## Usage
 
@@ -25,7 +25,13 @@ go test ./test/day01
 The solutions are executed from the root folder like this:
 
 ```shell
-go run . 01
+go run . 1
+```
+
+or with debug output:
+
+```shell
+go run . 1 debug
 ```
 
 The output has the following structure(no spoilers):
@@ -37,3 +43,4 @@ Part 1 took 53.584µs
 Part 2: 5454
 Part 2 took 11.4055ms
 ```
+

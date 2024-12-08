@@ -25,10 +25,8 @@ func Part2(lines []string) (sum int) {
 
 		if checkConditions(row) {
 			sum++
-		} else {
-			if checkWithDampener(row) {
-				sum++
-			}
+		} else if checkWithDampener(row) {
+			sum++
 		}
 	}
 
@@ -37,9 +35,7 @@ func Part2(lines []string) (sum int) {
 
 func checkWithDampener(row []int) bool {
 	for i := 0; i < len(row); i++ {
-		afterDampener := removeElement(row, i)
-
-		if checkConditions(afterDampener) {
+		if checkConditions(removeElement(row, i)) {
 			return true
 		}
 	}
@@ -47,17 +43,17 @@ func checkWithDampener(row []int) bool {
 }
 
 func checkConditions(row []int) bool {
-    condition := getOrderedCondition(row[0] < row[1])
+	condition := getOrderedCondition(row[0] < row[1])
 
 	return checkOrdered(row, condition) && checkAdjacent(row)
 }
 
 func getOrderedCondition(increasing bool) func(n1, n2 int) bool {
-    if increasing {
-        return func(n1, n2 int) bool { return n1 > n2 }
-    }
+	if increasing {
+		return func(n1, n2 int) bool { return n1 > n2 }
+	}
 
-    return func(n1, n2 int) bool { return n1 < n2 }
+	return func(n1, n2 int) bool { return n1 < n2 }
 }
 
 func removeElement(slice []int, s int) (arr []int) {
@@ -81,7 +77,6 @@ func checkAdjacent(numbers []int) bool {
 			return false
 		}
 	}
-
 	return true
 }
 
@@ -91,7 +86,6 @@ func checkOrdered(numbers []int, condition func(n1, n2 int) bool) bool {
 			return false
 		}
 	}
-
 	return true
 }
 
