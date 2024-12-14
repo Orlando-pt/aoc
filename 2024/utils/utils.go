@@ -44,3 +44,12 @@ func Min(a, b int) int {
 	}
 	return b
 }
+
+func ArrStrContains(arr []string, value string) bool {
+	for _, v := range arr {
+		if v == value {
+			return true
+		}
+	}
+	return false
+}
