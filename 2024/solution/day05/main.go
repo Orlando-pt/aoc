@@ -25,8 +25,7 @@ func Part2(lines []string) (sum int) {
 
 	for _, sequence := range updateSequences {
 		if !checkSequence(sequence, precedence) {
-            // fix it
-			utils.Debug("Valid sequence: ", sequence)
+			sequence = fixSequence(sequence, precedence)
 			sum += utils.StrToInt(sequence[len(sequence)/2])
 		}
 	}
@@ -34,16 +33,20 @@ func Part2(lines []string) (sum int) {
 	return
 }
 
-func fixSequence(sequence []string, precedence PrecedenceMap) (fixedSequence []string) {
-	for i := 0; i < len(sequence)-1; i++ {
-        rules := precedence[sequence[i]]
-        portion := sequence[i+1:]
-		if !checkRules(rules, portion) {
-            // TODO: continue from here
-			return 
+func fixSequence(sequence []string, precedence PrecedenceMap) []string {
+	l, r := 0, 1
+	for r < len(sequence) {
+		if utils.ArrStrContains(precedence[sequence[r]], sequence[l]) {
+			sequence[l], sequence[r] = sequence[r], sequence[l]
+		}
+		r++
+
+		if r == len(sequence) {
+			l++
+			r = l + 1
 		}
 	}
-    return
+	return sequence
 }
 
 func checkSequence(sequence []string, precedence PrecedenceMap) bool {
