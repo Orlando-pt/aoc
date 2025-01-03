@@ -38,7 +38,7 @@ func TestPart2(t *testing.T) {
     utils.SetTestLogger()
 	result := day.Part2(input)
 
-    expected := 0
+    expected := 6
 	if result != expected {
 		t.Errorf("Expected %d, got %d", expected, result)
 	}

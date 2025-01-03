@@ -2,84 +2,104 @@ package day06
 
 import "github.com/orlando-pt/aoc/2024/utils"
 
-const (
-	UP = iota
-	RIGHT
-	DOWN
-	LEFT
-)
+type index struct {
+	r, c int
+}
+
+var DIRECTIONS = [...]index{{-1, 0}, {0, 1}, {1, 0}, {0, -1}}
 
 func Part1(lines []string) (sum int) {
-	row, col := findGuardPosition(lines)
-	utils.Debug("Guard position: ", row, col)
-
-	sum = traverseMap(lines, row, col)
-	return
+	return len(getVisitedIndices(lines))
 }
 
 func Part2(lines []string) (sum int) {
+	visited := getVisitedIndices(lines)
+	startIndex := findGuard(lines)
+
+	for _, idx := range visited {
+		if (idx == startIndex) || lines[idx.r][idx.c] == '#' {
+			continue
+		}
+
+		lines[idx.r] = lines[idx.r][:idx.c] + "#" + lines[idx.r][idx.c+1:]
+		if hasCycle(lines, startIndex) {
+			sum++
+		}
+		lines[idx.r] = lines[idx.r][:idx.c] + "." + lines[idx.r][idx.c+1:]
+	}
+
 	return
 }
 
-func findGuardPosition(lines []string) (int, int) {
+func getVisitedIndices(lines []string) (indices []index) {
+	maxRow := len(lines)
+	maxCol := len(lines[0])
+
+	visited := make(map[index]bool)
+	facing := 0
+
+	at := findGuard(lines)
+	utils.Debug("Guard at:", at)
+
+	for isValidIndex(at, maxRow, maxCol) {
+		if lines[at.r][at.c] == '#' {
+			at.r -= DIRECTIONS[facing].r
+			at.c -= DIRECTIONS[facing].c
+			facing = (facing + 1) % 4
+			continue
+		}
+		visited[at] = true
+		at.r += DIRECTIONS[facing].r
+		at.c += DIRECTIONS[facing].c
+	}
+
+	for k := range visited {
+		indices = append(indices, k)
+	}
+	return
+}
+
+func hasCycle(lines []string, startIndex index) bool {
+	visited := make(map[index]index)
+	maxRow := len(lines)
+	maxCol := len(lines[0])
+
+	at := startIndex
+	facing := 0
+
+	for isValidIndex(at, maxRow, maxCol) {
+		if visited[at] == DIRECTIONS[facing] {
+			return true
+		}
+
+		visited[at] = DIRECTIONS[facing]
+
+		if lines[at.r][at.c] == '#' {
+			at.r -= DIRECTIONS[facing].r
+			at.c -= DIRECTIONS[facing].c
+			facing = (facing + 1) % 4
+			continue
+		}
+
+		lines[at.r] = lines[at.r][:at.c] + "X" + lines[at.r][at.c+1:]
+		at.r += DIRECTIONS[facing].r
+		at.c += DIRECTIONS[facing].c
+	}
+
+	return false
+}
+
+func isValidIndex(idx index, maxRow, maxCol int) bool {
+	return idx.r >= 0 && idx.c >= 0 && idx.r < maxRow && idx.c < maxCol
+}
+
+func findGuard(lines []string) (guard index) {
 	for i, line := range lines {
-		for j, char := range line {
-			if char == '^' {
-				return i, j
+		for j, c := range line {
+			if c == '^' {
+				return index{i, j}
 			}
 		}
 	}
-
-	return -1, -1
-}
-
-func traverseMap(lines []string, row, col int) (distinctPositions int) {
-	direction := UP
-	positionsCovered := make([]bool, len(lines)*len(lines[0]))
-	positionsCovered[row*len(lines)+col] = true
-
-	for {
-		nextRow, nextCol := nextCoords(row, col, direction)
-
-		if nextRow < 0 || nextRow >= len(lines) || nextCol < 0 || nextCol >= len(lines[0]) {
-			utils.Debug("Out of bounds")
-			break
-		}
-
-		if lines[nextRow][nextCol] == '#' {
-			utils.Debug("Found wall: ", nextRow, nextCol)
-			direction = changeDirection(direction)
-		}
-
-		row, col = nextCoords(row, col, direction)
-		utils.Debug("Moved to: ", row, col)
-
-		positionsCovered[row*len(lines)+col] = true
-	}
-
-	for _, wasCovered := range positionsCovered {
-		if wasCovered {
-			distinctPositions++
-		}
-	}
 	return
-}
-
-func nextCoords(row, col, direction int) (int, int) {
-	switch direction {
-	case UP:
-		return row - 1, col
-	case RIGHT:
-		return row, col + 1
-	case DOWN:
-		return row + 1, col
-	case LEFT:
-		return row, col - 1
-	}
-
-	return row, col
-}
-
-func changeDirection(direction int) int {
-	return (direction + 1) % 4
 }
