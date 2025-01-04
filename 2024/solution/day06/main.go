@@ -2,11 +2,11 @@ package day06
 
 import "github.com/orlando-pt/aoc/2024/utils"
 
-type index struct {
+type Index struct {
 	r, c int
 }
 
-var DIRECTIONS = [...]index{{-1, 0}, {0, 1}, {1, 0}, {0, -1}}
+var DIRECTIONS = [...]Index{{-1, 0}, {0, 1}, {1, 0}, {0, -1}}
 
 func Part1(lines []string) (sum int) {
 	return len(getVisitedIndices(lines))
@@ -31,11 +31,11 @@ func Part2(lines []string) (sum int) {
 	return
 }
 
-func getVisitedIndices(lines []string) (indices []index) {
+func getVisitedIndices(lines []string) (indices []Index) {
 	maxRow := len(lines)
 	maxCol := len(lines[0])
 
-	visited := make(map[index]bool)
+	visited := make(map[Index]bool)
 	facing := 0
 
 	at := findGuard(lines)
@@ -59,8 +59,8 @@ func getVisitedIndices(lines []string) (indices []index) {
 	return
 }
 
-func hasCycle(lines []string, startIndex index) bool {
-	visited := make(map[index]index)
+func hasCycle(lines []string, startIndex Index) bool {
+	visited := make(map[Index]Index)
 	maxRow := len(lines)
 	maxCol := len(lines[0])
 
@@ -89,15 +89,15 @@ func hasCycle(lines []string, startIndex index) bool {
 	return false
 }
 
-func isValidIndex(idx index, maxRow, maxCol int) bool {
+func isValidIndex(idx Index, maxRow, maxCol int) bool {
 	return idx.r >= 0 && idx.c >= 0 && idx.r < maxRow && idx.c < maxCol
 }
 
-func findGuard(lines []string) (guard index) {
+func findGuard(lines []string) (guard Index) {
 	for i, line := range lines {
 		for j, c := range line {
 			if c == '^' {
-				return index{i, j}
+				return Index{i, j}
 			}
 		}
 	}
