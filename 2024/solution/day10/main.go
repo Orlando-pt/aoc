@@ -1,6 +1,8 @@
 package day10
 
-import "github.com/orlando-pt/aoc/2024/utils"
+import (
+	"github.com/orlando-pt/aoc/2024/utils"
+)
 
 type Index struct {
 	x, y int
@@ -9,6 +11,10 @@ type Index struct {
 type PositionsVisited map[Index]bool
 
 var DIRECTIONS = [...]Index{{1, 0}, {-1, 0}, {0, -1}, {0, 1}}
+
+const (
+	TRAILEND = 9
+)
 
 func Part1(lines []string) (sum int) {
 
@@ -24,6 +30,12 @@ func Part1(lines []string) (sum int) {
 }
 
 func Part2(lines []string) (sum int) {
+	for y, line := range lines {
+		zeros := getZeroPositions(line)
+		for _, zero := range zeros {
+			sum += calculateRating(lines, Index{zero, y})
+		}
+	}
 	return
 }
 
@@ -31,7 +43,7 @@ func findHikePaths(lines []string, position Index, visited *PositionsVisited) (s
 	utils.Debug("X: ", position.x, " Y: ", position.y)
 
 	currentHeight := bToInt(lines[position.y][position.x])
-	if currentHeight == 9 {
+	if currentHeight == TRAILEND {
 		if !(*visited)[position] {
 			(*visited)[position] = true
 			return 1
@@ -45,15 +57,28 @@ func findHikePaths(lines []string, position Index, visited *PositionsVisited) (s
 	for _, direction := range DIRECTIONS {
 		newPosition := Index{position.x + direction.x, position.y + direction.y}
 
-		if checkBonds(newPosition, width, height) {
-			newHeight := bToInt(lines[newPosition.y][newPosition.x])
-
-			if newHeight == currentHeight+1 {
-				sum += findHikePaths(lines, newPosition, visited)
-			}
+		if checkBonds(newPosition, width, height) && bToInt(lines[newPosition.y][newPosition.x]) == currentHeight+1 {
+			sum += findHikePaths(lines, newPosition, visited)
 		}
 	}
 
+	return
+}
+
+func calculateRating(lines []string, position Index) (sum int) {
+	currentHeight := bToInt(lines[position.y][position.x])
+	if currentHeight == TRAILEND {
+		return 1
+	}
+
+	width, height := len(lines[0]), len(lines)
+	for _, direction := range DIRECTIONS {
+		newPosition := Index{position.x + direction.x, position.y + direction.y}
+		if checkBonds(newPosition, width, height) && bToInt(lines[newPosition.y][newPosition.x]) == currentHeight+1 {
+			sum += calculateRating(lines, newPosition)
+		}
+
+	}
 	return
 }
 
