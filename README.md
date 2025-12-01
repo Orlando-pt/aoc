@@ -11,6 +11,7 @@ This repository is dedicated to my Advent of Code learning journey. The primary 
 - [2022 (Java)](./2022)
 - [2023 (Go)](./2023)
 - [2024 (Go)](./2024)
+- [2025 (Kotlin)](./2025)
 
 ## What is Advent of Code?
 
