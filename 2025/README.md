@@ -3,6 +3,7 @@
 Let's dominate AoC 2025 🎄!
 
 - [Day01](./src/main/kotlin/days/Day1.kt) ★★
+- [Day02](./src/main/kotlin/days/Day2.kt) ★★
 
 ★ = completed the solution
 ☆ = had to get help
