@@ -36,7 +36,7 @@ class Day2 : Day(2) {
 
                     val subStrings = (0..idString.length - 1 step i).map { idString.substring(it, it + i) }
 
-                    if (subStrings.all { it == subStrings.first() }) {
+                    if (subStrings.distinct().size == 1) {
                         ret += num
                         break
                     }

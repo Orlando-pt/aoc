@@ -1,7 +1,6 @@
 package days
 
 class Day1 : Day(1) {
-    private val dialMax = 100
 
     override fun partOne(): Any {
         val instructions = getInstructions()
@@ -13,14 +12,14 @@ class Day1 : Day(1) {
                 val newDial = dial - it.distance
 
                 dial = if (newDial < 0) {
-                    dialMax + newDial
+                    DIAL_MAX + newDial
                 } else {
                     newDial
                 }
             } else {
                 dial += it.distance
             }
-            dial = dial % dialMax
+            dial = dial % DIAL_MAX
 
             if (dial == 0) {
                 dialZero += 1
@@ -36,8 +35,8 @@ class Day1 : Day(1) {
         var dialZero = 0
 
         instructions.forEach {
-            val remainder = it.distance % dialMax
-            dialZero += it.distance / dialMax
+            val remainder = it.distance % DIAL_MAX
+            dialZero += it.distance / DIAL_MAX
 
             if (it.direction == Direction.L) {
                 val newDial = dial - remainder
@@ -47,18 +46,18 @@ class Day1 : Day(1) {
                         dialZero += 1
                     }
 
-                    dial = dialMax + newDial
+                    dial = DIAL_MAX + newDial
                 } else {
                     dial = newDial
                 }
             } else {
                 dial += remainder
 
-                if (dial > dialMax) {
+                if (dial > DIAL_MAX) {
                     dialZero += 1
                 }
             }
-            dial = dial % dialMax
+            dial = dial % DIAL_MAX
 
             if (dial == 0) {
                 dialZero += 1
@@ -66,6 +65,11 @@ class Day1 : Day(1) {
         }
         return dialZero
     }
+
+    private companion object {
+        const val DIAL_MAX = 100
+    }
+
     enum class Direction {
         L, R
     }
